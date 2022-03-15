@@ -1,0 +1,114 @@
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.*;
+class mainMenu {
+	
+	void addFile() {
+		
+	}
+	
+	void secondMenu(String dirPath) {
+		Scanner scn= new Scanner(System.in);
+		System.out.println("Select from menu: \n 1. Add a file to the existing directory \n 2. Delete a user specified file from the existing directory \n 3. Search a user specified file from the main directory \n 4. navigate back to the main context\n");
+		int fromSecondMenu = scn.nextInt();
+		
+		File folder = new File(dirPath);
+		
+		switch(fromSecondMenu){  
+	    //Case statements  
+	    case 1: 
+	    	try  
+	    	{  
+	    	Scanner sc=new Scanner(System.in);         //object of Scanner class  
+	    	System.out.print("Enter the file name: ");  
+	    	String name=sc.nextLine();              //variable name to store the file name  
+	    	FileOutputStream fos=new FileOutputStream(name, true);  // true for append mode  
+	    	System.out.print("Enter file content: ");         
+	    	String str=sc.nextLine()+"\n";      //str stores the string which we have entered  
+	    	byte[] b= str.getBytes();       //converts string into bytes  
+	    	fos.write(b);           //writes bytes into file  
+	    	fos.close();            //close the file  
+	    	System.out.println("file saved.");  
+	    	}  
+	    	catch(Exception e)  
+	    	{  
+	    	e.printStackTrace();          
+	    	}  
+	    	
+	    	
+	    	
+            if(folder.isDirectory()) {
+            	File[] fileList = folder.createNewFile();
+
+                Arrays.sort(fileList);
+                for(File f : fileList) {
+                    System.out.println(f.getName());
+                }
+                System.out.println("\nTotal number of items present in the directory: " + fileList.length );
+
+            }
+
+	    break;  
+	    case 2: 
+	    	secondMenu();
+	    	
+	    break;  
+	    case 3: System.out.println("30");  
+	    break;  
+	    //Default case statement  
+	    default:System.out.println("Not in 10, 20 or 30");  
+	    }  
+	}
+	
+	
+	void firstMenu() {
+		Scanner scn= new Scanner(System.in);
+		System.out.println("Enter the file path: ");
+        String dirPath = scn.nextLine(); // Takes the directory path as the user input
+        File folder = new File(dirPath);
+		
+		System.out.println("Select from menu: \n 1. current file names in ascending order \n 2. details of the user interface \n 3. close the application");
+		
+		int fromFirstMenu = scn.nextInt();
+		
+	    switch(fromFirstMenu){  
+	    //Case statements  
+	    case 1: 
+	    	
+            if(folder.isDirectory()) {
+            	File[] fileList = folder.listFiles();
+
+                Arrays.sort(fileList);
+                for(File f : fileList) {
+                    System.out.println(f.getName());
+                }
+                System.out.println("\nTotal number of items present in the directory: " + fileList.length );
+
+            }
+
+	    break;  
+	    case 2: 
+	    	secondMenu(dirPath);
+	    	
+	    break;  
+	    case 3: System.out.println("30");  
+	    break;  
+	    //Default case statement  
+	    default:System.out.println("Not in 10, 20 or 30");  
+	    }  
+	}
+}
+
+public class first {
+
+	public static void main(String[] args) {
+		System.out.println("Welcome");
+		
+		mainMenu mainMenuObj = new mainMenu();
+		mainMenuObj.firstMenu();
+
+//		Scanner scn= new Scanner(System.in);
+
+	}
+
+}
